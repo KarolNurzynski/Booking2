@@ -10,15 +10,15 @@ import pl.coderslab.other.DbUtil;
 
 public class StatusDao {
 	
-	private static final String CREATE_STATUS_QUERY = "INSERT INTO status(status) VALUES (?);";
+	private static final String CREATE_STATUS_QUERY = "INSERT INTO status(name) VALUES (?);";
 	private static final String READ_STATUS_QUERY = "Select * from status where id = ?";
-	private static final String UPDATE_STATUS_QUERY = "UPDATE status SET status = ? WHERE id = ?;";
+	private static final String UPDATE_STATUS_QUERY = "UPDATE status SET name = ? WHERE id = ?;";
 	private static final String DELETE_STATUS_QUERY = "DELETE FROM status where id = ?;";
 	
 	public void create(Status status) {
 		try (Connection conn = DbUtil.getConn();
 			PreparedStatement ps = conn.prepareStatement(CREATE_STATUS_QUERY);) {
-			ps.setString(1, status.getStatus());
+			ps.setString(1, status.getName());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -34,7 +34,7 @@ public class StatusDao {
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
 					status.setId(id);
-					status.setStatus(rs.getString("status"));
+					status.setName(rs.getString("status"));
 				}
 			}
 		} catch (Exception e) { 
@@ -47,7 +47,7 @@ public class StatusDao {
 	public void update(Status status) {
 		try (Connection conn = DbUtil.getConn();
 			PreparedStatement ps = conn.prepareStatement(UPDATE_STATUS_QUERY);) {
-			ps.setString(1, status.getStatus());
+			ps.setString(1, status.getName());
 			ps.setInt(2, status.getId());
 			ps.executeUpdate();
 		} catch (Exception e) {

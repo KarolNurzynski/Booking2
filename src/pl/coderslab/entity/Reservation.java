@@ -1,6 +1,8 @@
 package pl.coderslab.entity;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Reservation {
 	
@@ -9,20 +11,20 @@ public class Reservation {
 	private Date checkin_date;
 	private Date checkout_date;
 	private String description=null;
-	private String status;
+	private Integer status_id;
 	private Integer user_id;
 	private Integer room_id;
 	
 	public Reservation() {}
 	
 	public Reservation(Integer id, Date order_date, Date checkin_date, Date checkout_date, String description,
-			String status, Integer user_id, Integer room_id) {
+			Integer status_id, Integer user_id, Integer room_id) {
 		this.id = id;
 		this.order_date = order_date;
 		this.checkin_date = checkin_date;
 		this.checkout_date = checkout_date;
 		this.description = description;
-		this.status = status;
+		this.status_id = status_id;
 		this.user_id = user_id;
 		this.room_id = room_id;
 	}
@@ -66,13 +68,13 @@ public class Reservation {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public String getStatus() {
-		return status;
+	
+	public Integer getStatus_id() {
+		return status_id;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus_id(Integer status_id) {
+		this.status_id = status_id;
 	}
 
 	public Integer getUser_id() {
@@ -89,6 +91,10 @@ public class Reservation {
 
 	public void setRoom_id(Integer room_id) {
 		this.room_id = room_id;
+	}
+	
+	public static String getCurrentDateTime() {
+		return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 	
 }

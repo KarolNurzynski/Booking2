@@ -40,12 +40,12 @@ public class Program2 {
 					System.out.println("Enter max. people: ");
 					Integer max_people = Integer.parseInt(scan.nextLine());
 					System.out.println("Enter description: ");
-					String description1 = scan.nextLine();
+					String description = scan.nextLine();
 					System.out.println("Enter ext. number: ");
 					String extension_number = scan.nextLine();
 					System.out.println("Enter price: ");
 					Double price = Double.parseDouble(scan.nextLine());
-					Room room = new Room(null, extension_number, max_people, description1, price, hotel_id);
+					Room room = new Room(null, extension_number, max_people, description, price, hotel_id);
 					roomdao.create(room);
 					
 					System.out.println("Room correctly added.");
@@ -90,7 +90,7 @@ public class Program2 {
 					int id = Integer.parseInt(scan.nextLine());
 					roomdao.delete(id);
 					
-					System.out.println("Hotel deleted.");
+					System.out.println("Room deleted.");
 					System.out.println("======================================");
 					
 				} else if (option.equals("quit")) {

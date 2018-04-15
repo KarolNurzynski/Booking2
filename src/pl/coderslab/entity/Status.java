@@ -3,13 +3,13 @@ package pl.coderslab.entity;
 public class Status {
 	
 	private Integer id;
-	private String status;
+	private String name;
 	
 	public Status() {}
 	
-	public Status(Integer id, String status) {
+	public Status(Integer id, String name) {
 		this.id = id;
-		this.status = status;
+		this.name = name;
 	}
 
 	public Integer getId() {
@@ -20,12 +20,12 @@ public class Status {
 		this.id = id;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getName() {
+		return name;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

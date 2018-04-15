@@ -8,16 +8,16 @@ public class User {
 	private String name;
 	private String email;
 	private String password;
-	private Integer userGroupId=null;
+	private Integer user_group_id=null;
 	
 	public User() {};
 	
-	public User(Integer id, String name, String email, String password, Integer userGroupId) {
+	public User(Integer id, String name, String email, String password, Integer user_group_id) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.userGroupId = userGroupId;
+		this.user_group_id = user_group_id;
 	}
 	
 	public Integer getId() {
@@ -45,10 +45,10 @@ public class User {
 		this.password = BCrypt.hashpw(password, BCrypt.gensalt());
 	}
 	public Integer getUserGroupId() {
-		return userGroupId;
+		return user_group_id;
 	}
-	public void setUserGroupId(Integer userGroupId) {
-		this.userGroupId = userGroupId;
+	public void setUserGroupId(Integer user_group_id) {
+		this.user_group_id = user_group_id;
 	}
 
 }

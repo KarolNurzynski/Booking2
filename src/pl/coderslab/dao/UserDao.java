@@ -17,6 +17,7 @@ public class UserDao {
 	private static final String READ_ALL_USERS_QUERY = "SELECT * FROM user;";
 	private static final String READ_USERS_BY_GROUP_QUERY = "SELECT * FROM user where user_group_id=?;";
 	private static final String READ_USER_BY_EMAIL_QUERY = "Select * from user where email = ?;";
+	private static final String READ_USER_BY_NAME_QUERY = "Select * from user where name = ?;";
 
 	public void create(User user) {
 		try (Connection conn = DbUtil.getConn();
@@ -37,13 +38,13 @@ public class UserDao {
 		try (Connection conn = DbUtil.getConn();
 			PreparedStatement ps = conn.prepareStatement(READ_USER_QUERY);) {
 			ps.setInt(1, userId);
-			try (ResultSet resultSet = ps.executeQuery()) {
-				while (resultSet.next()) {
-					user.setId(resultSet.getInt("id"));
-					user.setName(resultSet.getString("name"));
-					user.setEmail(resultSet.getString("email"));
-					user.setPassword(resultSet.getString("password"));
-					user.setUserGroupId(resultSet.getInt("user_group_id"));
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					user.setId(rs.getInt("id"));
+					user.setName(rs.getString("name"));
+					user.setEmail(rs.getString("email"));
+					user.setPassword(rs.getString("password"));
+					user.setUserGroupId(rs.getInt("user_group_id"));
 				}
 			}
 		} catch (Exception e) { 
@@ -58,13 +59,34 @@ public class UserDao {
 		try (Connection conn = DbUtil.getConn();
 			PreparedStatement ps = conn.prepareStatement(READ_USER_BY_EMAIL_QUERY);) {
 			ps.setString(1, email);
-			try (ResultSet resultSet = ps.executeQuery()) {
-				while (resultSet.next()) {
-					user.setId(resultSet.getInt("id"));
-					user.setName(resultSet.getString("name"));
-					user.setEmail(resultSet.getString("email"));
-					user.setPassword(resultSet.getString("password"));
-					user.setUserGroupId(resultSet.getInt("user_group_id"));
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					user.setId(rs.getInt("id"));
+					user.setName(rs.getString("name"));
+					user.setEmail(rs.getString("email"));
+					user.setPassword(rs.getString("password"));
+					user.setUserGroupId(rs.getInt("user_group_id"));
+				}
+			}
+		} catch (Exception e) { 
+				e.printStackTrace();
+				System.out.println("Error occured, try again!");
+		}
+		return user;
+	}
+	
+	public User readByName(String name) {
+		User user = new User();
+		try (Connection conn = DbUtil.getConn();
+			PreparedStatement ps = conn.prepareStatement(READ_USER_BY_NAME_QUERY);) {
+			ps.setString(1, name);
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					user.setId(rs.getInt("id"));
+					user.setName(rs.getString("name"));
+					user.setEmail(rs.getString("email"));
+					user.setPassword(rs.getString("password"));
+					user.setUserGroupId(rs.getInt("user_group_id"));
 				}
 			}
 		} catch (Exception e) { 
@@ -79,14 +101,14 @@ public class UserDao {
 		try (Connection conn = DbUtil.getConn();
 			PreparedStatement ps = conn.prepareStatement(READ_USERS_BY_GROUP_QUERY);) {
 			ps.setInt(1, user_group_id);
-			try (ResultSet resultSet = ps.executeQuery()) {
-				while (resultSet.next()) {
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
 					User user = new User();
-					user.setId(resultSet.getInt("id"));
-					user.setName(resultSet.getString("name"));
-					user.setEmail(resultSet.getString("email"));
-					user.setPassword(resultSet.getString("password"));
-					user.setUserGroupId(resultSet.getInt("user_group_id"));
+					user.setId(rs.getInt("id"));
+					user.setName(rs.getString("name"));
+					user.setEmail(rs.getString("email"));
+					user.setPassword(rs.getString("password"));
+					user.setUserGroupId(rs.getInt("user_group_id"));
 					users.add(user);
 				}
 			}
@@ -101,14 +123,14 @@ public class UserDao {
 		ArrayList<User> users = new ArrayList<User>();		
 		try (Connection conn = DbUtil.getConn();
 			PreparedStatement ps = conn.prepareStatement(READ_ALL_USERS_QUERY);) {
-			try (ResultSet resultSet = ps.executeQuery()) {
-				while (resultSet.next()) {
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
 					User user = new User();
-					user.setId(resultSet.getInt("id"));
-					user.setName(resultSet.getString("name"));
-					user.setEmail(resultSet.getString("email"));
-					user.setPassword(resultSet.getString("password"));
-					user.setUserGroupId(resultSet.getInt("user_group_id"));
+					user.setId(rs.getInt("id"));
+					user.setName(rs.getString("name"));
+					user.setEmail(rs.getString("email"));
+					user.setPassword(rs.getString("password"));
+					user.setUserGroupId(rs.getInt("user_group_id"));
 					users.add(user);
 				}
 			}
